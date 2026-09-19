@@ -1,0 +1,27 @@
+[Unit]
+Description=Project L.E.A.F. Camera Relay
+After=network-online.target nginx.service mysql.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=leaf
+Group=leaf
+WorkingDirectory=/var/www/proleaf
+
+ExecStart=/usr/local/bin/leaf-camera-relay
+
+Restart=always
+RestartSec=5
+
+Environment=APP_ENV=production
+EnvironmentFile=/etc/leaf-camera-relay.env
+
+StandardOutput=append:/var/www/proleaf/storage/logs/camera-relay.log
+StandardError=append:/var/www/proleaf/storage/logs/camera-relay-error.log
+
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

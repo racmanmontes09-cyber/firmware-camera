@@ -1,0 +1,4 @@
+.pio/
+.vscode/
+platformio_override.ini
+*.log
